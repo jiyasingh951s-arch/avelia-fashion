@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addMessage(text, 'user');
         chatInput.value = '';
 
-        fetch(`${API_URL} / chat`, {
+        fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

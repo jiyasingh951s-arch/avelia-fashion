@@ -1,21 +1,18 @@
 import os
-from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import uvicorn
 from fastapi.staticfiles import StaticFiles
-import os
 
 app = FastAPI(title="AVELIA Backend")
 
 # Enable CORS for frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 class ChatRequest(BaseModel):
@@ -55,30 +52,31 @@ PRODUCTS = [
 ]
 
 @app.get("/products")
-def get_products():
+async def get_products():
     return PRODUCTS
 
 @app.post("/chat")
-def chat(request: ChatRequest):
+async def chat(request: ChatRequest):
     message = request.message.lower()
     if "material" in message:
         return {"response": "Avelia garments are crafted from Italian silk and hand-sourced cashmere."}
     
-    # Generic high-end response for other messages
     return {"response": "Welcome to Avelia. Our concierge is currently assisting other patrons. Please leave a detailed inquiry and we will attend to you shortly."}
 
 @app.post("/contact-submit")
-def contact_submit(request: ContactRequest):
-    # In a real app, save to DB or send an email
-    return {"status": "success", "message": f"Thank you, {request.name}. Your inquiry has been received by our concierge."}
+async def contact_submit(request: ContactRequest):
+    return {"status": "success", "message": f"Thank you, {request.name}. Your inquiry has been received."}
 
-# Mount the frontend static files at the root
-frontend_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
-if os.path.isdir(frontend_dir):
-    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
+# --- STATIC FILES FIX ---
+# This looks for the frontend folder in the same directory as the backend folder
+current_dir = os.path.dirname(os.path.abspath(__file__)) # /app/backend
+base_dir = os.path.dirname(current_dir) # /app
+frontend_path = os.path.join(base_dir, "frontend")
+
+if os.path.isdir(frontend_path):
+    app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 if __name__ == "__main__":
     import uvicorn
-    import os
     port = int(os.environ.get("PORT", 8080))
-    uvicorn.run("backend.main:app", host="0.0.0.0", port=port)
+    uvicorn.run(app, host="0.0.0.0", port=port)
