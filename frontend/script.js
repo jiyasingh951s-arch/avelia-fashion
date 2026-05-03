@@ -1,5 +1,5 @@
 const API_URL = 
-"https://avelia-fashion-752376492797.us-central1.run.app/chat";
+"https://avelia-fashion-752376492797.us-central1.run.app / chat";
 document.addEventListener('DOMContentLoaded', () => {
     // ---- Elements ----
     const cartIcon = document.getElementById('cart-icon');
