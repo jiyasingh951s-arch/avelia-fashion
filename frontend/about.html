@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVELIA | Brand Story</title>
+    <meta name="description" content="Read the story behind AVELIA. Crafted from Italian silk and hand-sourced cashmere, our heritage is pure luxury.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand-logo"><a href="index.html">AVELIA</a></div>
+        <nav class="nav-links">
+            <a href="index.html">Shop</a>
+            <a href="about.html">Brand Story</a>
+            <a href="contact.html">Inquiry</a>
+        </nav>
+        <div class="cart-icon" id="cart-icon">
+            CART <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Your Selection</h2>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn-checkout">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in" style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h1 class="section-title">Our Heritage</h1>
+            <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem;">
+                Founded in the heart of Milan, AVELIA represents the pinnacle of modern editorial minimalism fused with timeless elegance. 
+                We believe that true luxury speaks in whispers—a delicate champagne gold chain resting against obsidian silk, the pristine 
+                drape of hand-sourced cashmere in the dead of winter.
+            </p>
+            <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem;">
+                Every garment is meticulously crafted. Our artisans spend hundreds of hours perfecting the silhouette of a single gown, 
+                ensuring that it not only flatters the form but moves with an ethereal grace. We source only the finest materials, from 
+                flawless Italian leather to pure, undyed cashmere from the steppes of Mongolia.
+            </p>
+            <p style="color: var(--color-gold); font-family: var(--font-heading); font-size: 1.5rem; font-style: italic; margin-top: 4rem;">
+                "Simplicity is the ultimate sophistication."
+            </p>
+        </section>
+    </main>
+
+    <div class="chat-widget">
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <h3>Avelia Concierge</h3>
+                <button class="close-chat" id="close-chat">&times;</button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your inquiry...">
+                <button id="chat-send">Send</button>
+            </div>
+        </div>
+        <button class="chat-toggle" id="chat-toggle" aria-label="Open Chat">
+            ✨
+        </button>
+    </div>
+
+    <footer class="fade-in">
+        <p>&copy; 2026 Avelia Luxury. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

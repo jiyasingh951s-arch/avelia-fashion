@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVELIA | Secure Checkout</title>
+    <meta name="description" content="Secure checkout for your AVELIA luxury garments.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand-logo"><a href="index.html">AVELIA</a></div>
+        <nav class="nav-links">
+            <a href="index.html">Shop</a>
+            <a href="about.html">Brand Story</a>
+            <a href="contact.html">Inquiry</a>
+        </nav>
+        <div class="cart-icon" id="cart-icon" style="visibility: hidden;">
+            CART <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="fade-in checkout-container">
+            <h1 class="section-title text-center">Secure Checkout</h1>
+            
+            <div class="checkout-items" id="checkout-items-container">
+                <!-- Checkout items populated by JS -->
+            </div>
+
+            <div style="border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 2rem; margin-top: 2rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 1.5rem; font-family: var(--font-heading); color: var(--color-gold); margin-bottom: 2rem;">
+                    <span>Grand Total</span>
+                    <span id="checkout-total">$0.00</span>
+                </div>
+                
+                <button class="btn-submit" style="width: 100%; font-size: 1.1rem; padding: 1.5rem;" onclick="alert('This is a demonstration. In a real application, you would be redirected to a payment gateway.')">Complete Purchase</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fade-in">
+        <p>&copy; 2026 Avelia Luxury. All rights reserved.</p>
+    </footer>
+
+    <!-- Include global script but also handle local renderCheckout -->
+    <script src="script.js"></script>
+    <script>
+        function renderCheckout() {
+            const container = document.getElementById('checkout-items-container');
+            const totalEl = document.getElementById('checkout-total');
+            let cart = JSON.parse(localStorage.getItem('avelia_cart')) || [];
+            
+            container.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--color-gray);">Your cart is empty.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'checkout-item';
+                    itemEl.innerHTML = `
+                        <div class="checkout-item-details">
+                            <img src="${item.imageUrl}" alt="${item.name}">
+                            <div>
+                                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.5rem;">${item.name}</h3>
+                                <button class="remove-item-checkout" data-index="${index}" style="background: none; border: none; color: var(--color-gray); cursor: pointer; text-transform: uppercase; font-size: 0.8rem;">Remove</button>
+                            </div>
+                        </div>
+                        <div style="color: var(--color-gold); font-size: 1.1rem;">$${item.price.toFixed(2)}</div>
+                    `;
+                    container.appendChild(itemEl);
+                });
+            }
+
+            totalEl.textContent = `$${total.toFixed(2)}`;
+
+            // Add remove listeners
+            document.querySelectorAll('.remove-item-checkout').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    let currentCart = JSON.parse(localStorage.getItem('avelia_cart')) || [];
+                    currentCart.splice(index, 1);
+                    localStorage.setItem('avelia_cart', JSON.stringify(currentCart));
+                    
+                    // Refresh current view
+                    renderCheckout();
+                    // Also trigger the global renderCart so the drawer (if it were accessible) updates
+                    if (typeof renderCart === 'function') {
+                        // We need to re-assign global cart variable in script.js which is somewhat isolated.
+                        // Refreshing page is easier for a simple vanilla JS setup.
+                        window.location.reload(); 
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCheckout);
+    </script>
+</body>
+</html>

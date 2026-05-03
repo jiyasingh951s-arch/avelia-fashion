@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVELIA | Private Inquiry</title>
+    <meta name="description" content="Contact the AVELIA concierge for bespoke fittings, private inquiries, or styling advice.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand-logo"><a href="index.html">AVELIA</a></div>
+        <nav class="nav-links">
+            <a href="index.html">Shop</a>
+            <a href="about.html">Brand Story</a>
+            <a href="contact.html">Inquiry</a>
+        </nav>
+        <div class="cart-icon" id="cart-icon">
+            CART <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Your Selection</h2>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn-checkout">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in" style="max-width: 600px; margin: 0 auto;">
+            <h1 class="section-title text-center">Private Inquiry</h1>
+            <p class="text-center" style="margin-bottom: 3rem; color: var(--color-gold);">
+                For bespoke fittings, styling advice, or specific inquiries, please contact our concierge team.
+            </p>
+            
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="inquiry">Your Inquiry</label>
+                    <textarea id="inquiry" class="form-control" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%;">Submit Inquiry</button>
+            </form>
+            <div id="form-message" style="margin-top: 1rem; text-align: center; color: var(--color-gold); display: none;"></div>
+        </section>
+    </main>
+
+    <div class="chat-widget">
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <h3>Avelia Concierge</h3>
+                <button class="close-chat" id="close-chat">&times;</button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your inquiry...">
+                <button id="chat-send">Send</button>
+            </div>
+        </div>
+        <button class="chat-toggle" id="chat-toggle" aria-label="Open Chat">
+            ✨
+        </button>
+    </div>
+
+    <footer class="fade-in">
+        <p>&copy; 2026 Avelia Luxury. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const inquiry = document.getElementById('inquiry').value;
+            const messageEl = document.getElementById('form-message');
+
+            fetch('/contact-submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, inquiry })
+            })
+            .then(res => res.json())
+            .then(data => {
+                messageEl.textContent = data.message;
+                messageEl.style.display = 'block';
+                this.reset();
+            })
+            .catch(err => {
+                console.error(err);
+                messageEl.textContent = "An error occurred. Please try again later.";
+                messageEl.style.color = "red";
+                messageEl.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

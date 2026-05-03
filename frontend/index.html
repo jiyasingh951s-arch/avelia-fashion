@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVELIA | Exclusive Collection</title>
+    <meta name="description" content="AVELIA - Discover our exclusive collection of luxury fashion, including silk gowns, cashmere coats, and champagne gold jewelry.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand-logo"><a href="index.html">AVELIA</a></div>
+        <nav class="nav-links">
+            <a href="index.html">Shop</a>
+            <a href="about.html">Brand Story</a>
+            <a href="contact.html">Inquiry</a>
+        </nav>
+        <div class="cart-icon" id="cart-icon">
+            CART <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Your Selection</h2>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items injected by JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn-checkout">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero text-center fade-in">
+            <h1 class="section-title" style="font-size: 4rem; margin-bottom: 1rem; color: var(--color-white);">The Autumn/Winter Collection</h1>
+            <p style="color: var(--color-gold); font-size: 1.2rem; margin-bottom: 3rem; font-family: var(--font-heading); letter-spacing: 2px;">Elegance redefined for the modern elite.</p>
+        </section>
+
+        <section id="shop" class="fade-in">
+            <div class="products-grid" id="products-container">
+                <!-- Products injected by JS -->
+            </div>
+        </section>
+    </main>
+
+    <div class="chat-widget">
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <h3>Avelia Concierge</h3>
+                <button class="close-chat" id="close-chat">&times;</button>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your inquiry...">
+                <button id="chat-send">Send</button>
+            </div>
+        </div>
+        <button class="chat-toggle" id="chat-toggle" aria-label="Open Chat">
+            ✨
+        </button>
+    </div>
+
+    <footer class="fade-in">
+        <p>&copy; 2026 Avelia Luxury. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
