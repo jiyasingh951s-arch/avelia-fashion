@@ -69,8 +69,9 @@ async def contact_submit(request: ContactRequest):
 
 # --- STATIC FILES FIX ---
 # This looks for the frontend folder in the same directory as the backend folder
-current_dir = os.path.dirname(os.path.abspath(__file__)) # /app/backend
-base_dir = os.path.dirname(current_dir) # /app
+# This tells the server to look outside the 'backend' folder to find 'frontend'
+current_dir = os.path.dirname(os.path.abspath(__file__))
+base_dir = os.path.dirname(current_dir)
 frontend_path = os.path.join(base_dir, "frontend")
 
 if os.path.isdir(frontend_path):
@@ -78,5 +79,6 @@ if os.path.isdir(frontend_path):
 
 if __name__ == "__main__":
     import uvicorn
+    # Use the port Google Cloud provides, or default to 8080
     port = int(os.environ.get("PORT", 8080))
     uvicorn.run(app, host="0.0.0.0", port=port)

@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---- Load Products on Index Page ----
     const productsContainer = document.getElementById('products-container');
     if (productsContainer) {
-        fetch(`${API_URL}/products`)
+        fetch(API_URL.replace('/chat', '/products'))
             .then(res => res.json())
             .then(products => {
                 products.forEach(product => {
