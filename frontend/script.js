@@ -1,5 +1,4 @@
-const API_URL =
-    window.location.origin;
+const API_URL = "https://avelia-fashion-752376492797.us-central1.run.app";
 document.addEventListener('DOMContentLoaded', () => {
     // ---- Elements ----
     const cartIcon = document.getElementById('cart-icon');
