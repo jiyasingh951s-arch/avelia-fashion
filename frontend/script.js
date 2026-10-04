@@ -1,4 +1,4 @@
-const API_URL = const API_URL = "/chat";
+const API_URL = "/chat";
 document.addEventListener('DOMContentLoaded', () => {
     // ---- Elements ----
     const cartIcon = document.getElementById('cart-icon');
