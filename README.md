@@ -3,7 +3,7 @@
 A high-end, full-stack e-commerce application featuring a minimalist luxury aesthetic and an integrated AI Concierge.
 
 ## 🚀 Live Demo
-https://avelia-fashion-752376492797.us-central1.run.app
+https://avelia-fashion.onrender.com/
 
 ## ✨ Key Features
 * **AI Concierge:** A FastAPI-powered chat assistant that provides real-time information about luxury materials and brand inquiries.
